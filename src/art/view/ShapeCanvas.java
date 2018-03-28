@@ -27,4 +27,11 @@ public class ShapeCanvas extends JPanel
 	private ArrayList<Ellipse2D> ellipseList;
 	private ArrayList<Rectangle> rectangleList;
 	private ArtController app;
+	
+	private BufferedImage canvasImage;
+	
+	public ShapeCanvas(ArtController app)
+	{
+		
+	}
 }
