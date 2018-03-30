@@ -160,4 +160,24 @@ public class ArtPanel extends JPanel
 		
 		return currentShape;
 	}
+	
+	private Polygon createRectangle(int sides)
+	{
+		Rectangle currentRectangle;
+		
+		int cornerX = (int) (Math.random() * 600);
+		int cornerY = (int) (Math.random() * 600);
+		int width = (int) (Math.random() * currentScale) + 1;
+		
+		if (coinflip())
+		{
+			currentRectangle = new Rectangle(cornerX, cornerY, width, width);
+		}
+		else
+		{
+			
+		}
+		
+		return currentShape;
+	}
 }
