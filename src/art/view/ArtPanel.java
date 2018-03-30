@@ -55,11 +55,11 @@ public class ArtPanel extends JPanel
 		
 		canvas = new ShapeCanvas(app);
 		sliderPanel = new JPanel();
-		appLayout.putConstraint(SpringLayout.NORTH, sliderPanel, 0, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.NORTH, sliderPanel, 0, SpringLayout.NORTH, canvas);
 		buttonPanel = new JPanel(new GridLayout(0,1));
+		appLayout.putConstraint(SpringLayout.NORTH, buttonPanel, 0, SpringLayout.NORTH, canvas);
+		appLayout.putConstraint(SpringLayout.WEST, buttonPanel, 40, SpringLayout.EAST, canvas);
 		appLayout.putConstraint(SpringLayout.WEST, sliderPanel, 20, SpringLayout.EAST, buttonPanel);
-		appLayout.putConstraint(SpringLayout.NORTH, buttonPanel, 0, SpringLayout.NORTH, this);
-		appLayout.putConstraint(SpringLayout.WEST, buttonPanel, 40, SpringLayout.EAST, this);
 		
 		triangleButton = new JButton("Add Triangle");
 		rectangleButton = new JButton("Add Rectangle");
@@ -135,5 +135,29 @@ public class ArtPanel extends JPanel
 	private void setupListeners()
 	{
 		
+	}
+	
+	private boolean coinFlip()
+	{
+		return (int) (Math.random() * 2) == 0;
+	}
+	
+	private Polygon createPolygon(int sides)
+	{
+		Polygon currentShape = new Polygon();
+		
+		int originX = (int) (Math.random() * 600);
+		int originY = (int) (Math.random() * 600);
+		
+		for (int index = 0; index < sides; index++)
+		{
+			int minus = coinFlip() ? -1 : 1;
+			int shiftX = (int) (Math.random() * currentScale) * minus;
+			minus = coinFlip() ? -1 : 1;
+			int shiftY = (int) (Math.random() * currentScale) * minus;
+			currentShape.addPoint(originX + shiftX, originY + shiftY);
+		}
+		
+		return currentShape;
 	}
 }
