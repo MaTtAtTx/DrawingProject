@@ -135,14 +135,14 @@ public class ArtPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		ellipseButton.addActionListener(new ActionListener())
+		ellipseButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
 				Ellipse2D ellipse = createEllipse();
 				canvas.addShape(ellipse);
 			}
-		}
+		});
 		
 		clearButton.addActionListener(click -> canvas.clear());
 		
@@ -155,7 +155,7 @@ public class ArtPanel extends JPanel
 			@Override
 			public void stateChanged(ChangeEvent e)
 			{
-				if (!scaleSlider.getValueIsAdjusting)
+				if (!scaleSlider.getValueIsAdjusting())
 				{
 					currentScale = scaleSlider.getValue();
 				}
@@ -167,7 +167,7 @@ public class ArtPanel extends JPanel
 			@Override
 			public void stateChanged(ChangeEvent e)
 			{
-				if (!edgeSlider.getValueIsAdjusting)
+				if (!edgeSlider.getValueIsAdjusting())
 				{
 					currentEdgeCount = edgeSlider.getValue();
 				}
