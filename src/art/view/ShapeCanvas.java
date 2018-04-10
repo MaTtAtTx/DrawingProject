@@ -122,6 +122,8 @@ public class ShapeCanvas extends JPanel
 			currentGraphics.fill(currentRectangle);
 		}
 		
+		//Never call paintComponent because it is handled completely behind the scenes
+		//Repaint actually tells the program to draw
 		currentGraphics.dispose();
 		repaint();
 	}
