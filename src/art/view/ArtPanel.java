@@ -93,6 +93,7 @@ public class ArtPanel extends JPanel
 		scaleSlider.setMajorTickSpacing(10);
 		scaleSlider.setPaintTicks(true);
 		scaleSlider.setPaintLabels(true);
+		scaleSlider.setValue(MINIMUM_SCALE);
 		
 		edgeSlider.setLabelTable(edgeLabels);
 		edgeSlider.setOrientation(JSlider.VERTICAL);
@@ -134,7 +135,44 @@ public class ArtPanel extends JPanel
 	
 	private void setupListeners()
 	{
+		ellipseButton.addActionListener(new ActionListener())
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				Ellipse2D ellipse = createEllipse();
+				canvas.addShape(ellipse);
+			}
+		}
 		
+		clearButton.addActionListener(click -> canvas.clear());
+		
+		saveButton.addActionListener(click -> canvas.save());
+		
+		colorButton.addActionListener(click -> canvas.changeBackground());
+		
+		scaleSlider.addChangeListener(new ChangeListener()
+		{
+			@Override
+			public void stateChanged(ChangeEvent e)
+			{
+				if (!scaleSlider.getValueIsAdjusting)
+				{
+					currentScale = scaleSlider.getValue();
+				}
+			}
+		});
+		
+		edgeSlider.addChangeListener(new ChangeListener()
+		{
+			@Override
+			public void stateChanged(ChangeEvent e)
+			{
+				if (!edgeSlider.getValueIsAdjusting)
+				{
+					currentEdgeCount = edgeSlider.getValue();
+				}
+			}
+		});
 	}
 	
 	private boolean coinFlip()
@@ -161,7 +199,7 @@ public class ArtPanel extends JPanel
 		return currentShape;
 	}
 	
-	private Polygon createRectangle(int sides)
+	private Rectangle createRectangle()
 	{
 		Rectangle currentRectangle;
 		
@@ -169,15 +207,37 @@ public class ArtPanel extends JPanel
 		int cornerY = (int) (Math.random() * 600);
 		int width = (int) (Math.random() * currentScale) + 1;
 		
-		if (coinflip())
+		if (coinFlip())
 		{
 			currentRectangle = new Rectangle(cornerX, cornerY, width, width);
 		}
 		else
 		{
-			
+			int height = (int)(Math.random() * currentScale) + 1;
+			currentRectangle = new Rectangle(cornerX, cornerY, width, height);
 		}
 		
-		return currentShape;
+		return currentRectangle;
+	}
+	
+	private Ellipse2D createEllipse()
+	{
+		Ellipse2D ellipse = new Ellipse2D.Double();
+		
+		int cornerX = (int) (Math.random() * 600);
+		int cornerY = (int) (Math.random() * 600);
+		double width = Math.random() * currentScale + 1;
+		
+		if (coinFlip())
+		{
+			ellipse.setFrame(cornerX, cornerY, width, width);
+		}
+		else
+		{
+			double height = Math.random() * currentScale + 1;
+			ellipse.setFrame(cornerX, cornerY, width, height);
+		}
+		
+		return ellipse;
 	}
 }
