@@ -93,7 +93,6 @@ public class ArtPanel extends JPanel
 		scaleSlider.setMajorTickSpacing(10);
 		scaleSlider.setPaintTicks(true);
 		scaleSlider.setPaintLabels(true);
-		scaleSlider.setValue(MINIMUM_SCALE);
 		
 		edgeSlider.setLabelTable(edgeLabels);
 		edgeSlider.setOrientation(JSlider.VERTICAL);
@@ -135,6 +134,33 @@ public class ArtPanel extends JPanel
 	
 	private void setupListeners()
 	{
+		rectangleButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				Rectangle rectangle = createRectangle();
+				canvas.addShape(rectangle);
+			}
+		});
+		
+		triangleButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				Polygon triangle = createPolygon(3);
+				canvas.addShape(triangle);
+			}
+		});
+		
+		polygonButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				Polygon polygon = createPolygon(currentEdgeCount);
+				canvas.addShape(polygon);
+			}
+		});
+		
 		ellipseButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
