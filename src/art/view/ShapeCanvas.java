@@ -90,12 +90,27 @@ public class ShapeCanvas extends JPanel
 	
 	public void save()
 	{
-		
+		try
+		{
+			JFileChooser saveDialog = new JFileChooser();
+			saveDialog.showSaveDialog(app.getFrame());
+			String savePath = saveDialog.getSelectedFile().getPath();
+			ImageIO.write(canvasImage, "PNG", new File(savePath));
+		}
+		catch (IOException error)
+		{
+			app.handleErrors(error);
+		}	
 	}
 	
 	private Color randomColor()
 	{
-		return null;
+		int red = (int) (Math.random() * 256);
+		int green = (int) (Math.random() * 256);
+		int blue = (int) (Math.random() * 256);
+		int alpha = (int) (Math.random() * 256);
+		
+		return new Color(red, green, blue, alpha);
 	}
 	
 	private void updateImage()
