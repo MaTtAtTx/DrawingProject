@@ -102,7 +102,7 @@ public class ArtPanel extends JPanel
 	private void setupPanel()
 	{
 		this.setLayout(appLayout);
-		this.setBackground(new Color(125,37,12));
+		this.setBackground(new Color(((int)(Math.random() * 256)), ((int)(Math.random() * 256)), ((int)(Math.random() * 256)), 255));
 		this.setPreferredSize(new Dimension(1024,768));
 		this.add(canvas);
 		
