@@ -72,12 +72,20 @@ public class ShapeCanvas extends JPanel
 	
 	public void clear()
 	{
-		
+		canvasImage = new BufferedImage(600, 600, BufferedImage.TYPE_INT_ARGB);
+		ellipseList.clear();
+		triangleList.clear();
+		polygonList.clear();
+		rectangleList.clear();
+		updateImage();
 	}
 	
 	public void changeBackground()
 	{
-		
+		Graphics2D current = canvasImage.createGraphics();
+		current.setPaint(randomColor());
+		current.fillRect(0, 0, canvasImage.getWidth(), canvasImage.getHeight());
+		updateImage();
 	}
 	
 	public void save()
@@ -94,6 +102,15 @@ public class ShapeCanvas extends JPanel
 	{
 		Graphics2D currentGraphics = (Graphics2D) canvasImage.getGraphics();
 		
+		for (Ellipse2D current : ellipseList)
+		{
+			currentGraphics.setColor(randomColor());
+			currentGraphics.setStroke(new BasicStroke(2));
+			currentGraphics.fill(current);
+			currentGraphics.setColor(randomColor());
+			currentGraphics.draw(current);
+		}
+		
 		for (Polygon currentTriangle : triangleList)
 		{
 			currentGraphics.setColor(randomColor());
@@ -105,15 +122,6 @@ public class ShapeCanvas extends JPanel
 			currentGraphics.setColor(randomColor());
 			currentGraphics.setStroke(new BasicStroke(4));
 			currentGraphics.draw(currentPolygon);
-		}
-		
-		for (Ellipse2D current : ellipseList)
-		{
-			currentGraphics.setColor(randomColor());
-			currentGraphics.setStroke(new BasicStroke(2));
-			currentGraphics.fill(current);
-			currentGraphics.setColor(randomColor());
-			currentGraphics.draw(current);
 		}
 		
 		for (Rectangle currentRectangle : rectangleList)
