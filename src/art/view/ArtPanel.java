@@ -7,6 +7,9 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Hashtable;
 
@@ -80,8 +83,8 @@ public class ArtPanel extends JPanel
 		scaleLabels.put((MAXIMUM_SCALE + MINIMUM_SCALE) / 2, new JLabel("<HTML>Medium<BR>Shape</HTML>"));
 		scaleLabels.put(MAXIMUM_SCALE, new JLabel("<HTML>Large<BR>Shape</HTML>"));
 		
-		edgeLabels.put(MINIMUM_SCALE, new JLabel("Edges: " + MINIMUM_EDGE));
-		edgeLabels.put(MAXIMUM_SCALE, new JLabel("Edges: " + MAXIMUM_EDGE));
+		edgeLabels.put(MINIMUM_EDGE, new JLabel("Edges: " + MINIMUM_EDGE));
+		edgeLabels.put(MAXIMUM_EDGE, new JLabel("Edges: " + MAXIMUM_EDGE));
 		
 		scaleSlider.setLabelTable(scaleLabels);
 		scaleSlider.setOrientation(JSlider.VERTICAL);
@@ -102,7 +105,7 @@ public class ArtPanel extends JPanel
 	private void setupPanel()
 	{
 		this.setLayout(appLayout);
-		this.setBackground(new Color(((int)(Math.random() * 256)), ((int)(Math.random() * 256)), ((int)(Math.random() * 256)), 255));
+		this.setBackground(new Color(121,59,131));
 		this.setPreferredSize(new Dimension(1024,768));
 		this.add(canvas);
 		
@@ -198,6 +201,56 @@ public class ArtPanel extends JPanel
 				{
 					currentEdgeCount = edgeSlider.getValue();
 				}
+			}
+		});
+		
+		canvas.addMouseMotionListener(new MouseMotionListener()
+		{
+			@Override
+			public void mouseDragged(MouseEvent drag)
+			{
+				int x = drag.getX();
+				int y = drag.getY();
+				canvas.drawOnCanvas(x, y, currentEdgeCount);
+			}
+			
+			@Override
+			public void mouseMoved(MouseEvent e)
+			{
+				
+			}
+		});
+		
+		canvas.addMouseListener(new MouseListener()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+				canvas.resetLine();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				canvas.resetLine();
 			}
 		});
 	}
